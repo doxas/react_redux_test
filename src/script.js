@@ -1,16 +1,30 @@
 
-// import modules =============================================================
+import React from 'react';
+import {render} from 'react-dom';
+import {connect, Provider} from 'react-redux';
+import {createStore} from 'redux';
 
-(() => {
+window.addEventListener('load', () => {
+    const initialState = {message: 'hello redux.'};
 
-// constant variables =========================================================
+    const store = createStore((initialState) => {
+        return {initialState};
+    }, initialState);
 
-// variables ==================================================================
+    const App = (props) => {
+        return (
+            <div>{props.message}</div>
+        );
+    };
 
-// elements (see eventSetting function) =======================================
+    const ReduxApp = connect((state) => {
+        return {message: state.message};
+    })(App);
 
-// initialize and auth check ==================================================
-console.log('😲 Oh! 😲');
-
-})();
+    render(
+        <Provider store={store}>
+            <ReduxApp />
+        </Provider>
+    , document.getElementById('wrapper'));
+}, false);
 
