@@ -1,30 +1,20 @@
 
-import React from 'react';
-import {render} from 'react-dom';
-import {connect, Provider} from 'react-redux';
+// from packages
+import React         from 'react';
+import {render}      from 'react-dom';
+import {Provider}    from 'react-redux';
 import {createStore} from 'redux';
+// from source
+import reducer from './reducer.js';
+import App     from './conteiner.js';
 
 window.addEventListener('load', () => {
-    const initialState = {message: 'hello redux.'};
-
-    const store = createStore((initialState) => {
-        return {initialState};
-    }, initialState);
-
-    const App = (props) => {
-        return (
-            <div>{props.message}</div>
-        );
-    };
-
-    const ReduxApp = connect((state) => {
-        return {message: state.message};
-    })(App);
-
+    const store = createStore(reducer);
     render(
         <Provider store={store}>
-            <ReduxApp />
+            <App />
         </Provider>
-    , document.getElementById('wrapper'));
+        , document.getElementById('wrapper')
+    );
 }, false);
 
