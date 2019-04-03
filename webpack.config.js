@@ -34,6 +34,10 @@ module.exports = (env, argv) => {
                             presets: ['env', 'react']
                         }
                     }
+                },
+                {
+                    test: /\.css$/,
+                    use: ['style-loader', 'css-loader']
                 }
             ]
         },
