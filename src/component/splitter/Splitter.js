@@ -1,5 +1,6 @@
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Splitter.css';
 import Util from '../../util.js';
 
@@ -39,9 +40,9 @@ export default class Splitter extends React.Component {
                 second.width = `${secondRatio}%`;
                 break;
             case 'horizontal':
-            default:
                 first.height  = `${firstRatio}%`;
                 second.height = `${secondRatio}%`;
+                break;
         }
         return {
             first: first,
@@ -62,3 +63,13 @@ export default class Splitter extends React.Component {
         );
     }
 }
+
+Splitter.propTypes = {
+    splitDirection: PropTypes.oneOf([
+        Splitter.SPLIT_DIRECTION_HORIZONTAL,
+        Splitter.SPLIT_DIRECTION_VERTICAL
+    ]).isRequired,
+    ratio:          PropTypes.number,
+    firstChild:     PropTypes.node.isRequired,
+    secondChild:    PropTypes.node.isRequired
+};
