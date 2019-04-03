@@ -2,8 +2,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import App from './component/app/App.js'
-import action from './action.js'
+import App from '../component/app/App.js'
+import action from '../action/action.js'
 
 function mapStateToProps(state){
     return state;
