@@ -1,0 +1,40 @@
+
+.splitter {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.splitter.horizontal {
+    flex-direction: column;
+}
+
+.splitter.vertical {
+    flex-direction: row;
+}
+
+.split {
+    background-color: gray;
+}
+
+.splitter.horizontal .split {
+    width: 100%;
+    min-height: 5px;
+    max-height: 5px;
+    flex-direction: column;
+    cursor: row-resize;
+}
+
+.splitter.vertical {
+    min-width: 5px;
+    max-width: 5px;
+    height: 100%;
+    flex-direction: row;
+    cursor: col-resize;
+}
+
+.inner {
+    width: 100%;
+    height: 100%;
+}
+
