@@ -25,17 +25,15 @@ module.exports = (env, argv) => {
         module: {
             rules: [
                 {
-                    test: /\.js$/,
+                    test: /\.jsx?$/,
                     include: path.resolve(__dirname, 'src'),
                     exclude: /node_modules/,
-                    use: [{
+                    use: {
                         loader: 'babel-loader',
                         options: {
-                            presets: [
-                                ['env']
-                            ]
+                            presets: ['env', 'react']
                         }
-                    }]
+                    }
                 }
             ]
         },
