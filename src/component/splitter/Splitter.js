@@ -24,7 +24,7 @@ export default class Splitter extends React.Component {
     /**
      * 0.0 ～ 1.0 の数値をパーセンテージ単位の割合いに変換する
      * @param {string} direction - 分割する方向
-     * @param {number} [ratio=0.5] - 元となる正規化された係数
+     * @param {number} [ratio=0.5] - 正規化された係数（0.0 ~ 1.0）
      * @return {object}
      * @property {object} first - 最初の要素の割合いを表すパーセンテージの文字列
      * @property {object} second - ふたつ目の要素の割合いを表すパーセンテージの文字列
@@ -73,3 +73,4 @@ Splitter.propTypes = {
     firstChild:     PropTypes.node.isRequired,
     secondChild:    PropTypes.node.isRequired
 };
+
