@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import App from '../component/app/App.js'
-import action from '../action/action.js'
+import actionCreator from '../action/appAction.js'
 
 // redux の state をどのように Props に変換するか
 function mapStateToProps(state){
@@ -17,7 +17,7 @@ function mapDispatchToProps(dispatch){
     return {
         clicker: () => {
             // action creator を実行してアクション（Pure Object）を生成
-            dispatch(action.hoge());
+            dispatch(actionCreator.hoge());
         }
     };
 }

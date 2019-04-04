@@ -1,7 +1,6 @@
 
-export default {
-    // action creator
-    hoge: () => {
+export default class AppActionCreator {
+    static hoge(){
         return {
             type: 'HOGE'
         };
