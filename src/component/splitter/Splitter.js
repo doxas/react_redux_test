@@ -1,8 +1,13 @@
 
+// from package
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Splitter.css';
+
+// from source
 import Util from '../../util.js';
+
+// current css
+import './Splitter.css';
 
 export default class Splitter extends React.Component {
     /**
@@ -35,11 +40,11 @@ export default class Splitter extends React.Component {
         let first  = {};
         let second = {};
         switch(direction){
-            case 'vertical':
+            case Splitter.SPLIT_DIRECTION_VERTICAL:
                 first.width  = `${firstRatio}%`;
                 second.width = `${secondRatio}%`;
                 break;
-            case 'horizontal':
+            case Splitter.SPLIT_DIRECTION_HORIZONTAL:
                 first.height  = `${firstRatio}%`;
                 second.height = `${secondRatio}%`;
                 break;
@@ -64,6 +69,12 @@ export default class Splitter extends React.Component {
     }
 }
 
+/**
+ * @prop {string} splitDirection - SPLIT_DIRECTIONS で得られるいずれかの文字列で指定する分割方向
+ * @prop {number} ratio - 0.0 ～ 1.0 で指定する分割時の割合い
+ * @prop {Node} firstChild - 最初の要素
+ * @prop {Node} secondChild - ふたつ目の要素
+ */
 Splitter.propTypes = {
     splitDirection: PropTypes.oneOf([
         Splitter.SPLIT_DIRECTION_HORIZONTAL,
