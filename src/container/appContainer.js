@@ -8,7 +8,7 @@ import component from '../component/app/App.js'
 import actionCreator from '../action/appAction.js'
 
 // store の state をどのように props に mapping するか
-function mapStateToProps(state){
+function mapStateToProps(state, props){
     return {
         value: state.app.value,
         ratio: state.app.ratio,
