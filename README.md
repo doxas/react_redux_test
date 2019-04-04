@@ -9,13 +9,17 @@ test.
 
 `src/script.js` がクライアントの実装のエントリポイントとなる。
 
-`src/script.js` では `src/reducer/index.js` が `import` されている。これは複数の reducer を束ねたもので同階層にある `xxxxReducer,js` を `import` している。
+`src/script.js` では `src/reducer/index.js` が `import` されている。これは複数の reducer を束ねたもので同階層にある `xxxxReducer.js` を `import` している。
 
-```javascript index.js
+```javascript
+// src/reducer/index.js
+
 // redux が持つ combineReducers メソッドをインポート
 import {combineReducers} from 'redux';
+
 // reducer の実装をインポート
 import appReducer from './appReducer.js';
+
 // このファイルからは combineReducers の戻り値をエクスポートする
 // 引数には、オブジェクト構造で reducer に key（以下の例では app）を付与しておく
 // ここで与えた key が redux の state のルート直下にキーとしてぶら下がる格好になる
@@ -40,7 +44,9 @@ action は、どのような意図を持っているのかを `type` という�
 }
 ```
 
-reducer はこのような（ピュアなオブジェクトで表現された）action を受け取った場合これを処理しようとする。（これを reducer に対して action を dispatch する、と表現する）
+reducer はこのような（ピュアなオブジェクトで表現された）action を受け取った場合これを処理しようとする。
+
+> ※ これを「reducer に対して action を dispatch する」と表現する
 
 reducer の定義のなかに、該当するアクションタイプを受け取った場合に行うべき処理の定義が存在する場合、reducer は神聖なる領域 Store を「更新のために完全に新しく生成された state」で上書き更新しようとする。
 
