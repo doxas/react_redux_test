@@ -1,8 +1,16 @@
 
 export default class AppActionCreator {
-    static hoge(){
+    static clickChildNode(){
         return {
-            type: 'HOGE'
+            type: 'CLICK_CONTAINER',
+        };
+    }
+    static mousemoveFromSplitter(ratio){
+        return {
+            type: 'MOUSEMOVE_FROM_SPLITTER',
+            payload: {
+                ratio: ratio
+            }
         };
     }
 }

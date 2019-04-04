@@ -1,26 +1,32 @@
 
+// from package
 import React from 'react';
 import {connect} from 'react-redux';
 
-import App from '../component/app/App.js'
+// from source
+import component from '../component/app/App.js'
 import actionCreator from '../action/appAction.js'
 
-// redux の state をどのように Props に変換するか
+// store の state をどのように props に mapping するか
 function mapStateToProps(state){
     return {
-        fuga: state.app.fuga
+        value: state.app.value,
+        ratio: state.app.ratio,
     };
 }
 
-// store の dispatch をどのように Props のメソッドとして利用するか
+// store の dispatch を伴う関数をどのように props にメソッドとして mapping するか
 function mapDispatchToProps(dispatch){
     return {
-        clicker: () => {
-            // action creator を実行してアクション（Pure Object）を生成
-            dispatch(actionCreator.hoge());
-        }
+        clickContainer: (evt) => {
+            evt.preventDefault();
+            dispatch(actionCreator.clickChildNode());
+        },
+        changeRatio: (ratio) => {
+            dispatch(actionCreator.mousemoveFromSplitter(ratio));
+        },
     };
 }
 
 // react-redux.connect でコンポーネントの props に state を関連付ける
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(component)

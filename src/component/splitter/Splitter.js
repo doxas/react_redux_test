@@ -27,6 +27,22 @@ export default class Splitter extends React.Component {
     static get SPLIT_DIRECTIONS(){return [Splitter.SPLIT_DIRECTION_HORIZONTAL, Splitter.SPLIT_DIRECTION_VERTICAL];}
 
     /**
+     * @constructor
+     */
+    constructor(props){
+        super(props);
+
+        // initial properties =================================================
+        // this.hoge = null;
+
+        // create refs ========================================================
+        this.refWrapper = React.createRef();
+
+        // self binding =======================================================
+        this.mouseDown = this.mouseDown.bind(this);
+    }
+
+    /**
      * 0.0 ～ 1.0 の数値をパーセンテージ単位の割合いに変換する
      * @param {string} direction - 分割する方向
      * @param {number} [ratio=0.5] - 正規化された係数（0.0 ~ 1.0）
@@ -55,14 +71,41 @@ export default class Splitter extends React.Component {
         };
     }
 
+    /**
+     * onmousedown
+     * @param {MouseEvent} evt
+     */
+    mouseDown(evt){
+        let wrapper = this.refWrapper.current;
+        let moveListener = (evt) => {
+            evt.preventDefault();
+            let bound = wrapper.getBoundingClientRect();
+            let x = Math.max(evt.clientX - bound.left, 0);
+            let y = Math.max(evt.clientY - bound.top, 0);
+            let ratio = null;
+            if(this.props.splitDirection === Splitter.SPLIT_DIRECTION_HORIZONTAL){
+                ratio = y / bound.height;
+            }else{
+                ratio = x / bound.width;
+            }
+            this.props.onChangeRatio(ratio);
+        };
+        let upListener = () => {
+            window.removeEventListener('mousemove', moveListener);
+            window.removeEventListener('mouseup', upListener);
+        };
+        window.addEventListener('mousemove', moveListener, false);
+        window.addEventListener('mouseup', upListener, false);
+    }
+
     render(){
         let classNameArray = ['splitter', this.props.splitDirection];
         let joinedClassName = classNameArray.join(' ');
         let ratio = this.generateRatio(this.props.splitDirection, this.props.ratio);
         return (
-            <div className={joinedClassName}>
+            <div ref={this.refWrapper} className={joinedClassName}>
                 <div className='inner' style={ratio.first}>{this.props.firstChild}</div>
-                <div className='split'></div>
+                <div className='split' onMouseDown={this.mouseDown}></div>
                 <div className='inner' style={ratio.second}>{this.props.secondChild}</div>
             </div>
         );
@@ -80,8 +123,9 @@ Splitter.propTypes = {
         Splitter.SPLIT_DIRECTION_HORIZONTAL,
         Splitter.SPLIT_DIRECTION_VERTICAL
     ]).isRequired,
-    ratio:          PropTypes.number,
     firstChild:     PropTypes.node.isRequired,
-    secondChild:    PropTypes.node.isRequired
+    secondChild:    PropTypes.node.isRequired,
+    onChangeRatio:  PropTypes.func.isRequired,
+    ratio:          PropTypes.number,
 };
 
