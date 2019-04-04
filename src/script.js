@@ -5,14 +5,14 @@ import {render}      from 'react-dom';
 import {Provider}    from 'react-redux';
 import {createStore} from 'redux';
 // from source
-import reducer from './reducer/index.js';
-import App     from './container/container.js';
+import reducer      from './reducer/index.js';
+import AppContainer from './container/appContainer.js';
 
 window.addEventListener('load', () => {
     let store = createStore(reducer);
     render(
         <Provider store={store}>
-            <App />
+            <AppContainer />
         </Provider>
         , document.body.querySelector('#wrapper')
     );
