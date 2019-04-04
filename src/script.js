@@ -5,7 +5,7 @@ import {render}      from 'react-dom';
 import {Provider}    from 'react-redux';
 import {createStore} from 'redux';
 // from source
-import reducer from './reducer/reducer.js';
+import reducer from './reducer/index.js';
 import App     from './container/container.js';
 
 window.addEventListener('load', () => {
