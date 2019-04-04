@@ -8,12 +8,8 @@ import {createStore} from 'redux';
 import reducer from './reducer/reducer.js';
 import App     from './container/container.js';
 
-const INITIAL_STATE = {
-    fuga: 999
-};
-
 window.addEventListener('load', () => {
-    let store = createStore(reducer, INITIAL_STATE);
+    let store = createStore(reducer);
     render(
         <Provider store={store}>
             <App />

@@ -5,8 +5,11 @@ import {connect} from 'react-redux';
 import App from '../component/app/App.js'
 import action from '../action/action.js'
 
+// 
 function mapStateToProps(state){
-    return state;
+    return {
+        fuga: state.app.fuga
+    };
 }
 
 // argument 'dispatch' from store
