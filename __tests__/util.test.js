@@ -18,12 +18,12 @@ describe('Util', () => {
             expect(Util.Math.easing(1.0)).toBe(1.0);
         });
         test('easeOutCubic', () => {
-            expect(Util.Math.easing(0.0)).toBe(0.0);
-            expect(Util.Math.easing(1.0)).toBe(1.0);
+            expect(Util.Math.easeOutCubic(0.0)).toBe(0.0);
+            expect(Util.Math.easeOutCubic(1.0)).toBe(1.0);
         });
         test('easeQuintic', () => {
-            expect(Util.Math.easing(0.0)).toBe(0.0);
-            expect(Util.Math.easing(1.0)).toBe(1.0);
+            expect(Util.Math.easeQuintic(0.0)).toBe(0.0);
+            expect(Util.Math.easeQuintic(1.0)).toBe(1.0);
         });
     });
 
@@ -53,6 +53,36 @@ describe('Util', () => {
             expect(ret[1]).toBeCloseTo(0.0, 2);
             expect(ret[2]).toBeCloseTo(1.0, 2);
         });
+    });
+
+    test('Util.isNumber', () => {
+        expect(Util.isNumber(0)).toBe(true);
+        expect(Util.isNumber(0.0)).toBe(true);
+        expect(Util.isNumber(0xf)).toBe(true);
+        expect(Util.isNumber(null)).toBe(false);
+        expect(Util.isNumber('0')).toBe(false);
+        expect(Util.isNumber([])).toBe(false);
+        expect(Util.isNumber({})).toBe(false);
+    });
+
+    test('Util.isString', () => {
+        expect(Util.isString(0)).toBe(false);
+        expect(Util.isString(0.0)).toBe(false);
+        expect(Util.isString(0xf)).toBe(false);
+        expect(Util.isString(null)).toBe(false);
+        expect(Util.isString('0')).toBe(true);
+        expect(Util.isString([])).toBe(false);
+        expect(Util.isString({})).toBe(false);
+    });
+
+    test('Util.isObject', () => {
+        expect(Util.isObject(0)).toBe(false);
+        expect(Util.isObject(0.0)).toBe(false);
+        expect(Util.isObject(0xf)).toBe(false);
+        expect(Util.isObject(null)).toBe(false);
+        expect(Util.isObject('0')).toBe(false);
+        expect(Util.isObject([])).toBe(false);
+        expect(Util.isObject({})).toBe(true);
     });
 });
 
