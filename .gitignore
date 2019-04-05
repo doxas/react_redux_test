@@ -1,5 +1,4 @@
-/.firebase/
+/coverage
 /node_modules
 /public/js/script.js
-firebase-key.json
 
