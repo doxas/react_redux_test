@@ -35,6 +35,9 @@ describe('Util', () => {
             expect(Util.Str.zeroPadding(-1, 3)).toBe('-001');
             expect(Util.Str.zeroPadding(-100, 3)).toBe('-100');
             expect(Util.Str.zeroPadding(-10000, 3)).toBe('-10000');
+            expect(Util.Str.zeroPadding(0.1, 3)).toBe('000.1');
+            expect(Util.Str.zeroPadding(null, 3)).toBeNull();
+            expect(Util.Str.zeroPadding(1, null)).toBeNull();
         });
         test('convertTimeToSerial', () => {
             let string = '1234/05/06 07:08:09';
@@ -52,6 +55,14 @@ describe('Util', () => {
             expect(ret[0]).toBeCloseTo(1.0, 2);
             expect(ret[1]).toBeCloseTo(0.0, 2);
             expect(ret[2]).toBeCloseTo(1.0, 2);
+            ret = Util.Str.hexStringToNumber(null);
+            expect(ret).toBeNull();
+            ret = Util.Str.hexStringToNumber('ZZZZZZ');
+            expect(ret).toBeNull();
+            ret = Util.Str.hexStringToNumber('#ffff');
+            expect(ret).toBeNull();
+            ret = Util.Str.hexStringToNumber('ffffffffff');
+            expect(ret).toBeNull();
         });
     });
 

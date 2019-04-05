@@ -35,6 +35,7 @@ class MathUtil {
 
 class StringUtil {
     static zeroPadding(s, n){
+        if(s == null || (Util.isString(s) !== true && Util.isNumber(s) !== true)){return null;}
         if(n == null || Util.isNumber(n) !== true || n <= 0){return null;}
         let nega = (s < 0);
         let f = ((`${s}`).match(/\./) != null);
@@ -66,7 +67,7 @@ class StringUtil {
         if(color == null || Util.isString(color) !== true){return null;}
         if(color.search(/^#+[\d|a-f|A-F]+$/) === -1){return null;}
         let s = color.replace('#', '');
-        if(s.length !== 3 && s.length !== 6){return null;}
+        if(s.length !== 6){return null;}
         let t = s.length / 3;
         return [
             parseInt(color.substr(1, t), 16) / 255,
