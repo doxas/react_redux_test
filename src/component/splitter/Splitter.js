@@ -117,6 +117,7 @@ export default class Splitter extends React.Component {
  * @prop {number} ratio - 0.0 ～ 1.0 で指定する分割時の割合い
  * @prop {Node} firstChild - 最初の要素
  * @prop {Node} secondChild - ふたつ目の要素
+ * @prop {function} onChangeRatio - マウスが動いた際に求めた ratio を引数に受け取る関数
  */
 Splitter.propTypes = {
     splitDirection: PropTypes.oneOf([
