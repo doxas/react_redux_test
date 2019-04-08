@@ -8,7 +8,7 @@ import component from '../component/app/App.js'
 import actionCreator from '../action/appAction.js'
 
 // store の state をどのように props に mapping するか
-function mapStateToProps(state, props){
+export function mapStateToProps(state, props){
     return {
         value: state.app.value,
         ratio: state.app.ratio,
@@ -16,7 +16,7 @@ function mapStateToProps(state, props){
 }
 
 // store の dispatch を伴う関数をどのように props にメソッドとして mapping するか
-function mapDispatchToProps(dispatch){
+export function mapDispatchToProps(dispatch){
     return {
         clickContainer: (evt) => {
             evt.preventDefault();
