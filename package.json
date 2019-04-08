@@ -14,6 +14,14 @@
     "test:open": "http-server ./coverage/lcov-report -op 9090",
     "test": "npm-run-all test:coverage test:open"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.css$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/__tests__/setupTests.js"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/doxas/react_redux_test.git"
@@ -29,8 +37,10 @@
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "babel-jest": "^24.7.1",
-    "babel-loader": "^7.1.5",
+    "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
     "jest": "^24.7.1",
     "npm-run-all": "^4.1.5",
     "prop-types": "^15.7.2",
