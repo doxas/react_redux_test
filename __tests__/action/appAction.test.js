@@ -1,5 +1,5 @@
 
-// target component of test
+// target action of test
 import action from '../../src/action/appAction.js';
 
 describe('action/appAction.js', () => {
