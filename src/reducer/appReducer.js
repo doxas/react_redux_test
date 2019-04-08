@@ -1,5 +1,5 @@
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
     value: 999,
     ratio: 0.5,
 };
