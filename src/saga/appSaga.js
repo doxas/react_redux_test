@@ -3,7 +3,7 @@ import {call, put, takeEvery} from 'redux-saga/effects';
 import Api from '../api/index.js';
 import '@babel/polyfill';
 
-function* getRequest(action){
+export function* getRequest(action){
     // Api.getRequest の結果を受けて……
     let {result, error} = yield call(Api.getRequest, action.payload);
     if(error == null){
@@ -23,7 +23,9 @@ function* getRequest(action){
 // 該当の action が発行された際には第二引数の関数がコールされる
 // ここで export している redux-saga.effects.takeEvery の戻り値を
 // src/saga/index.js 側で import しており、複数の saga を同時に設定できるようにしている
-const saga = takeEvery('REQUEST_TO', getRequest);
+const saga = [
+    takeEvery('REQUEST_TO', getRequest),
+];
 export default saga;
 
 

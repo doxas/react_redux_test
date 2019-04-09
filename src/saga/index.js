@@ -8,7 +8,7 @@ import appSaga from './appSaga.js';
 
 export default function* rootSaga(){
     yield all([
-        appSaga,
+        ...appSaga,
     ]);
 }
 
