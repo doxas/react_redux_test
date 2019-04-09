@@ -1,5 +1,5 @@
 
-const TEST_URL = 'https://www.test-cors.org';
+const TEST_URL = 'http://localhost:9090/index.html';
 
 export default class Api {
     static getRequest(payload){
@@ -8,13 +8,13 @@ export default class Api {
         // 返っていく仕組みになっている
         return fetch(
             TEST_URL,
-            {method: 'GET'}
+            {method: 'GET', mode: 'cors'}
         )
         .then((response) => {
-            return response.json();
+            return response.text();
         })
-        .then((jsonParsedObject) => {
-            return {result: jsonParsedObject};
+        .then((responseText) => {
+            return {result: responseText};
         })
         .catch((err) => {
             return {error: err};
