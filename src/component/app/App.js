@@ -11,10 +11,10 @@ import './App.css';
 export default class App extends React.Component {
     render(){
         return (
-            <div className='app' onClick={this.props.clickContainer}>
+            <div className='app' onClick={this.props.clickContainer} onDoubleClick={this.props.clickRequest}>
                 <Splitter
                     splitDirection={Splitter.SPLIT_DIRECTION_HORIZONTAL}
-                    firstChild={<div>{this.props.value}</div>}
+                    firstChild={<div>{this.props.context}</div>}
                     secondChild={<div>{this.props.value}</div>}
                     onChangeRatio={this.props.changeRatio}
                     ratio={this.props.ratio}

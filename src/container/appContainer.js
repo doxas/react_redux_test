@@ -10,14 +10,19 @@ import actionCreator from '../action/appAction.js'
 // store の state をどのように props に mapping するか
 export function mapStateToProps(state, props){
     return {
-        value: state.app.value,
-        ratio: state.app.ratio,
+        value:   state.app.value,
+        ratio:   state.app.ratio,
+        context: state.app.context
     };
 }
 
 // store の dispatch を伴う関数をどのように props にメソッドとして mapping するか
 export function mapDispatchToProps(dispatch){
     return {
+        clickRequest: (evt) => {
+            evt.preventDefault();
+            dispatch(actionCreator.doubleClickRequest());
+        },
         clickContainer: (evt) => {
             evt.preventDefault();
             dispatch(actionCreator.clickChildNode());

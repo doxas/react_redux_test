@@ -1,5 +1,13 @@
 
 export default class AppActionCreator {
+    static doubleClickRequest(){
+        return {
+            type: 'REQUEST_TO',
+            payload: {
+                target: 'other server'
+            }
+        };
+    }
     static clickChildNode(){
         return {
             type: 'CLICK_CONTAINER',
