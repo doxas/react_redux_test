@@ -8,16 +8,22 @@ export default class Api {
         // 返っていく仕組みになっている
         return fetch(
             TEST_URL,
-            {method: 'GET', mode: 'cors'}
+            {method: 'GET'}
         )
         .then((response) => {
             return response.text();
         })
         .then((responseText) => {
-            return {result: responseText};
+            return {
+                result: responseText,
+                error: null
+            };
         })
         .catch((err) => {
-            return {error: err};
+            return {
+                result: null,
+                error: err
+            };
         });
     }
 }
