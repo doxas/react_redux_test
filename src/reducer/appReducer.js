@@ -19,7 +19,7 @@ export default function appReducer(state = INITIAL_STATE, action){
                 return Object.assign({}, state, {context: JSON.stringify(action.payload.result)});
             }
         case 'RESPONSE_FAIL':
-            let errMessage = action.payload.err.message;
+            let errMessage = action.payload.error.message;
             return Object.assign({}, state, {context: errMessage});
         default:
             return state;
