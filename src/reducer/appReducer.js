@@ -16,7 +16,7 @@ export default function appReducer(state = INITIAL_STATE, action){
             if(action.payload.result.hasOwnProperty('error') === true){
                 return Object.assign({}, state, {context: action.payload.result.error});
             }else{
-                return Object.assign({}, state, {context: JSON.stringify(action.payload.result)});
+                return Object.assign({}, state, {context: action.payload.result});
             }
         case 'RESPONSE_FAIL':
             let errMessage = action.payload.error.message;
