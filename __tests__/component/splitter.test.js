@@ -7,9 +7,13 @@ import {shallow, mount, render} from 'enzyme';
 import Splitter from '../../src/component/splitter/Splitter.js';
 
 describe('component/splitter/Splitter.js', () => {
+    // Splitter の shallowWrapper
     let wrapper;
+    // Splitter の実インスタンス用
     let instance;
+    // onChangeRatio に仕掛ける mock
     let onChangeRatioMock = jest.fn();
+    // まず最初に shallowWrapper を生成し、実インスタンスを取得しておく
     beforeAll(() => {
         wrapper = shallow(
             <Splitter
@@ -22,7 +26,7 @@ describe('component/splitter/Splitter.js', () => {
         );
         instance = wrapper.instance();
     });
-    test('static properties', () => {
+    test('static な定数の構成と値が正しいかどうか', () => {
         expect(Splitter.SPLIT_DIRECTION_HORIZONTAL).toBe('horizontal');
         expect(Splitter.SPLIT_DIRECTION_VERTICAL).toBe('vertical');
         expect(Splitter.SPLIT_DIRECTIONS).toBeInstanceOf(Array);
@@ -30,7 +34,7 @@ describe('component/splitter/Splitter.js', () => {
         expect(Splitter.SPLIT_DIRECTIONS[0]).toBe(Splitter.SPLIT_DIRECTION_HORIZONTAL);
         expect(Splitter.SPLIT_DIRECTIONS[1]).toBe(Splitter.SPLIT_DIRECTION_VERTICAL);
     });
-    test('construction in a component', () => {
+    test('Splitter の DOM 構造が正しいかどうか', () => {
         expect(wrapper.hasClass('splitter')).toBeTruthy();
         expect(wrapper.hasClass(Splitter.SPLIT_DIRECTION_HORIZONTAL)).toBeTruthy();
         expect(wrapper.children().at(0).props().className).toEqual('inner');
@@ -39,7 +43,7 @@ describe('component/splitter/Splitter.js', () => {
         expect(wrapper.children().at(2).props().className).toEqual('inner');
         expect(wrapper.children().at(2).props().style).toEqual({height: '50%'});
     });
-    test('Splitter.generateRatio', () => {
+    test('Splitter.generateRatio が正しい結果を返しているか', () => {
         expect(instance.generateRatio(Splitter.SPLIT_DIRECTION_HORIZONTAL, 0.5)).toEqual({
             first: {height: '50%'},
             second: {height: '50%'}
@@ -49,7 +53,7 @@ describe('component/splitter/Splitter.js', () => {
             second: {width: '50%'}
         });
     });
-    test('Splitter.mouseDown', () => {
+    test('Splitter.mouseDown が正しく動作しているか', () => {
         let mouseEvent = {
             clientX: 50,
             clientY: 50,
@@ -73,9 +77,12 @@ describe('component/splitter/Splitter.js', () => {
         }};
         instance.mouseDown();
         addMap.mousemove(mouseEvent);
+        wrapper.setProps({splitDirection: Splitter.SPLIT_DIRECTION_VERTICAL});
+        addMap.mousemove(mouseEvent);
         addMap.mouseup(mouseEvent);
-        expect(onChangeRatioMock).toHaveBeenCalledTimes(1);
+        expect(onChangeRatioMock).toHaveBeenCalledTimes(2);
         expect(onChangeRatioMock.mock.calls[0][0]).toBe(0.5);
+        expect(onChangeRatioMock.mock.calls[1][0]).toBe(0.5);
         expect(Object.keys(removeMap).length).toBe(2);
     });
 });
