@@ -54,19 +54,26 @@ describe('component/splitter/Splitter.js', () => {
         });
     });
     test('Splitter.mouseDown が正しく動作しているか', () => {
+        // マウスイベントをエミュレートするための仮のオブジェクト
         let mouseEvent = {
             clientX: 50,
             clientY: 50,
             preventDefault: () => {}
         }
+        // addEventListener が呼ばれた場合をエミュレートするために、登録された
+        // Listener をオブジェクトに確保しておき、任意に呼び出せるようにしておく
         let addMap = {};
         let removeMap = {};
         window.addEventListener = jest.fn((event, listener) => {
+            // イベント名をキーにして保持
             addMap[event] = listener;
         });
         window.removeEventListener = jest.fn((event, listener) => {
+            // イベント名をキーにして保持
             removeMap[event] = listener
         });
+        // ref の中身もエミュレートする必要があるので、コンポーネントの内部で
+        // 使われている メソッドやその戻り値を準備しておく
         instance.refWrapper.current = {getBoundingClientRect: () => {
             return {
                 left: 0,
@@ -75,14 +82,22 @@ describe('component/splitter/Splitter.js', () => {
                 width: 100
             };
         }};
+        // まず一度該当のメソッドを呼ぶ
         instance.mouseDown();
+        // mousemove に登録された関数に対して疑似マウスイベントを渡し実行する
         addMap.mousemove(mouseEvent);
+        // 網羅的にチェックするために props を差し替えてもう一度呼んでおく
         wrapper.setProps({splitDirection: Splitter.SPLIT_DIRECTION_VERTICAL});
         addMap.mousemove(mouseEvent);
+        // mouseup のほうも実行しておく
         addMap.mouseup(mouseEvent);
+        // ここまではすべて事前の準備で、以下からその結果をチェックしていく
+        // onChangeRatio が合計２回呼び出されているかどうか
         expect(onChangeRatioMock).toHaveBeenCalledTimes(2);
+        // それぞれの呼び出しにおいて mock に渡された引数の値が正しいかどうか
         expect(onChangeRatioMock.mock.calls[0][0]).toBe(0.5);
         expect(onChangeRatioMock.mock.calls[1][0]).toBe(0.5);
+        // removeEventListener は正しく呼び出されたかどうか
         expect(Object.keys(removeMap).length).toBe(2);
     });
 });
