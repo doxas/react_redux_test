@@ -9,14 +9,14 @@ import Splitter from '../../src/component/splitter/Splitter.js';
 describe('component/splitter/Splitter.js', () => {
     let wrapper;
     let instance;
-    let mock = jest.fn();
+    let onChangeRatioMock = jest.fn();
     beforeAll(() => {
         wrapper = shallow(
             <Splitter
                 splitDirection={Splitter.SPLIT_DIRECTION_HORIZONTAL}
                 firstChild={<div></div>}
                 secondChild={<div></div>}
-                onChangeRatio={mock}
+                onChangeRatio={onChangeRatioMock}
                 ratio={0.5}
             />
         );
@@ -48,6 +48,35 @@ describe('component/splitter/Splitter.js', () => {
             first: {width: '50%'},
             second: {width: '50%'}
         });
+    });
+    test('Splitter.mouseDown', () => {
+        let mouseEvent = {
+            clientX: 50,
+            clientY: 50,
+            preventDefault: () => {}
+        }
+        let addMap = {};
+        let removeMap = {};
+        window.addEventListener = jest.fn((event, listener) => {
+            addMap[event] = listener;
+        });
+        window.removeEventListener = jest.fn((event, listener) => {
+            removeMap[event] = listener
+        });
+        instance.refWrapper.current = {getBoundingClientRect: () => {
+            return {
+                left: 0,
+                top: 0,
+                height: 100,
+                width: 100
+            };
+        }};
+        instance.mouseDown();
+        addMap.mousemove(mouseEvent);
+        addMap.mouseup(mouseEvent);
+        expect(onChangeRatioMock).toHaveBeenCalledTimes(1);
+        expect(onChangeRatioMock.mock.calls[0][0]).toBe(0.5);
+        expect(Object.keys(removeMap).length).toBe(2);
     });
 });
 
