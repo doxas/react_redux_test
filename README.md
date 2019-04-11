@@ -121,5 +121,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(component)
 
 > ※ Container Component の配下には、当然その他の子コンポーネントたちが含まれることになるが、こちらは Presentational Components と呼ばれ区別される。
 
+## 非同期処理
+
+reducer へと action が dispatch される際に、その間に割り込んでくるのが middleware である。
+
+middleware は一切設定されていなくても問題なく動作するようになっているが、非同期処理（多くはネットワーク越しの通信）が必要になる場合、action -> middleware -> reducer というように、間に一度クッションとして middleware が挟まる。
+
+middleware は action を監視し、特定の action が発行された場合に限りそれをフックして動作する、という挙動を可能にする。（実際にはすべての action を見ている）
+
+また、通信した結果などの非同期処理の完了を待ち、自らが新しい action を実行することができる。この仕組みのおかげで、通信を行った結果如何によって最終的に reducer に渡る action を差し替えることができるようになる。
+
+## ユニットテスト
+
+
 
 
