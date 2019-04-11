@@ -1,5 +1,5 @@
 
-// target reducer of test
+// from source
 import action from '../../src/action/appAction.js';
 import {mapStateToProps} from '../../src/container/appContainer.js';
 import {mapDispatchToProps} from '../../src/container/appContainer.js';

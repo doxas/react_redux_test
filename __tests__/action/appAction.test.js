@@ -1,5 +1,5 @@
 
-// target action of test
+// from source
 import action from '../../src/action/appAction.js';
 
 describe('action/appAction.js', () => {

@@ -3,7 +3,7 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 
-// target component of test
+// from source
 import App from '../../src/component/app/App.js';
 
 describe('component/app/App.js', () => {
@@ -32,6 +32,11 @@ describe('component/app/App.js', () => {
         wrap.simulate('click');
         expect(clickContainerMock).toHaveBeenCalled();
     });
+
+    // 上記のように shallow をそれぞれのテストブロックのなかで行ってもよいが、
+    // 最初に一度だけ実行しておくようにしたければ beforeAll を使えばよい。
+    // 変数のスコープを describe のブロック全体になるようにして宣言し、そこに
+    // beforeAll 内で shallowWrapper を取得すればよい。
 });
 
 

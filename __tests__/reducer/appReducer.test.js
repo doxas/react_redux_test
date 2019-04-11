@@ -1,5 +1,5 @@
 
-// target reducer of test
+// from source
 import action from '../../src/action/appAction.js';
 import reducer, {INITIAL_STATE} from '../../src/reducer/appReducer.js';
 

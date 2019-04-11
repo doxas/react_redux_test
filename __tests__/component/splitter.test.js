@@ -3,7 +3,7 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 
-// target component of test
+// from source
 import Splitter from '../../src/component/splitter/Splitter.js';
 
 describe('component/splitter/Splitter.js', () => {
